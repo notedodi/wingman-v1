@@ -225,9 +225,13 @@
 
 <body class="text-gray-800 dark:text-gray-200">
 
-    <!-- Login Page -->
+    <div id="global-loader"
+        class="fixed inset-0 bg-gray-100 dark:bg-slate-900 flex items-center justify-center z-[9999]">
+        <i class="fas fa-spinner fa-spin text-4xl text-primary-500"></i>
+    </div>
+
     <div id="login-page"
-        class="relative flex flex-col items-center justify-center h-full w-full p-4 text-center bg-gradient-to-br from-primary-500 to-primary-700">
+        class="hidden relative flex flex-col items-center justify-center h-full w-full p-4 text-center bg-gradient-to-br from-primary-500 to-primary-700">
         <div class="absolute top-0 left-0 w-full h-full bg-cover opacity-10"
             style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
         <div
@@ -248,10 +252,8 @@
         </footer>
     </div>
 
-    <!-- Main Application Container -->
     <div id="app-container" class="hidden h-full w-full flex flex-col">
         <main>
-            <!-- Page: Home/Dashboard -->
             <div id="page-home" class="page p-4">
                 <div class="max-w-4xl mx-auto">
                     <div class="flex items-center justify-between mb-4">
@@ -291,60 +293,48 @@
                 </div>
             </div>
 
-            <!-- Page: Doctor Management -->
             <div id="page-doctors" class="page hidden p-4">
                 <div class="max-w-4xl mx-auto">
                     <div class="flex flex-col sm:flex-row justify-between items-center mb-5 gap-4">
                         <h1 class="text-xl font-bold text-gray-900 dark:text-white">Manajemen Dokter</h1>
-                        <div class="relative w-full sm:w-auto">
-                            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                            <input type="search" id="doctor-search-input" placeholder="Cari dokter..."
-                                class="form-input text-sm w-full sm:w-64 pl-9 p-2 border rounded-lg">
-                        </div>
-                        <button id="btn-add-doctor"
+                        <div class="relative w-full sm:w-auto"> <i
+                                class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i> <input
+                                type="search" id="doctor-search-input" placeholder="Cari dokter..."
+                                class="form-input text-sm w-full sm:w-64 pl-9 p-2 border rounded-lg"> </div> <button
+                            id="btn-add-doctor"
                             class="w-full sm:w-auto bg-primary-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-primary-700 transition-all duration-300 flex items-center justify-center gap-2 font-semibold text-sm transform hover:scale-105">
-                            <i class="fas fa-user-plus"></i> <span>Tambah</span>
-                        </button>
+                            <i class="fas fa-user-plus"></i> <span>Tambah</span> </button>
                     </div>
                     <div id="doctor-list" class="space-y-3"></div>
                 </div>
             </div>
-
-            <!-- Page: Transactions -->
             <div id="page-transactions" class="page hidden p-4">
                 <div class="max-w-4xl mx-auto">
                     <h1 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Daftar Transaksi</h1>
                     <div
                         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 mb-4 bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm">
                         <input type="text" id="filter-search" placeholder="Cari deskripsi..."
-                            class="form-input w-full p-2 border rounded-lg text-sm lg:col-span-2">
-                        <select id="filter-doctor" class="form-input w-full p-2 border rounded-lg text-sm"></select>
-                        <input type="date" id="filter-start-date"
-                            class="form-input w-full p-2 border rounded-lg text-sm text-gray-500">
-                        <input type="date" id="filter-end-date"
-                            class="form-input w-full p-2 border rounded-lg text-sm text-gray-500">
+                            class="form-input w-full p-2 border rounded-lg text-sm lg:col-span-2"> <select
+                            id="filter-doctor" class="form-input w-full p-2 border rounded-lg text-sm"></select> <input
+                            type="date" id="filter-start-date"
+                            class="form-input w-full p-2 border rounded-lg text-sm text-gray-500"> <input type="date"
+                            id="filter-end-date" class="form-input w-full p-2 border rounded-lg text-sm text-gray-500">
                     </div>
                     <div id="transaction-summary"
                         class="hidden bg-blue-50 dark:bg-slate-800 p-3 rounded-xl shadow-sm my-4"></div>
-
                     <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm overflow-hidden">
                         <div
                             class="flex flex-wrap justify-between items-center p-4 gap-2 border-b border-gray-200 dark:border-slate-700">
-                            <div class="flex gap-2">
-                                <button id="sort-by-date"
+                            <div class="flex gap-2"> <button id="sort-by-date"
                                     class="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-xs font-medium flex items-center gap-1">
-                                    <i class="fas fa-sort"></i> Urutkan Tanggal </button>
-                                <button id="reset-filters-btn"
+                                    <i class="fas fa-sort"></i> Urutkan Tanggal </button> <button id="reset-filters-btn"
                                     class="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-xs font-medium flex items-center gap-1">
-                                    <i class="fas fa-undo"></i> Reset Filter </button>
-                            </div>
-                            <button id="btn-export"
+                                    <i class="fas fa-undo"></i> Reset Filter </button> </div> <button id="btn-export"
                                 class="bg-success text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-green-600 flex items-center gap-2 transition-all transform hover:scale-105">
                                 <i class="fas fa-file-export"></i>Ekspor </button>
                         </div>
                         <nav id="time-group-tabs" class="flex justify-around p-1 bg-gray-50 dark:bg-slate-900/50"
-                            aria-label="Tabs">
-                            <button data-group="day"
+                            aria-label="Tabs"> <button data-group="day"
                                 class="group-tab text-gray-600 dark:text-gray-300 flex-1 py-2 font-medium text-xs rounded-lg transition-all">Harian</button>
                             <button data-group="week"
                                 class="group-tab text-gray-600 dark:text-gray-300 flex-1 py-2 font-medium text-xs rounded-lg transition-all">Mingguan</button>
@@ -358,13 +348,11 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Page: Profile -->
             <div id="page-profile" class="page hidden p-4">
                 <div class="max-w-4xl mx-auto">
                     <h1 class="text-xl font-bold text-gray-900 dark:text-white mb-5">Profil & Pengaturan</h1>
-                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm text-center">
-                        <img id="profile-avatar" src="https://placehold.co/100x100/E2E8F0/4A5568?text=U"
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm text-center"> <img
+                            id="profile-avatar" src="https://placehold.co/100x100/E2E8F0/4A5568?text=U"
                             alt="User Avatar"
                             class="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-primary-200 dark:border-primary-700 shadow-md">
                         <h2 id="profile-name" class="text-xl font-semibold text-gray-900 dark:text-white">Nama Pengguna
@@ -372,23 +360,19 @@
                         <p id="profile-email" class="text-sm text-gray-500 dark:text-gray-400">email@pengguna.com</p>
                         <button id="btn-edit-profile"
                             class="mt-4 bg-gray-200 text-gray-800 px-4 py-1.5 rounded-lg hover:bg-gray-300 dark:bg-slate-700 dark:text-gray-200 dark:hover:bg-slate-600 font-semibold transition-colors text-xs">
-                            <i class="fas fa-pencil-alt mr-1"></i> Edit Profil
-                        </button>
-
+                            <i class="fas fa-pencil-alt mr-1"></i> Edit Profil </button>
                         <div class="mt-8 space-y-4 max-w-sm mx-auto">
                             <div
                                 class="flex justify-between items-center bg-gray-100 dark:bg-slate-700/50 p-3 rounded-lg">
                                 <div class="flex items-center gap-3"> <i
                                         class="fas fa-moon text-primary-600 dark:text-primary-400"></i> <span
                                         class="font-medium text-sm text-gray-700 dark:text-gray-200">Mode Gelap</span>
-                                </div>
-                                <button id="theme-toggle"
+                                </div> <button id="theme-toggle"
                                     class="relative inline-flex items-center h-6 rounded-full w-11 transition-colors bg-gray-300 dark:bg-slate-600">
                                     <span id="theme-icon-container"
                                         class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform translate-x-1 dark:translate-x-6">
                                         <i id="theme-icon" class="fas text-yellow-400"></i> </span> </button>
-                            </div>
-                            <button id="btn-logout"
+                            </div> <button id="btn-logout"
                                 class="w-full bg-danger text-white px-4 py-2.5 rounded-lg hover:bg-red-600 transition-colors font-semibold flex items-center justify-center gap-2 text-sm">
                                 <i class="fas fa-sign-out-alt"></i>Keluar </button>
                         </div>
@@ -423,7 +407,6 @@
         </div>
     </div>
     <div id="modal-container" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
-        <!-- Other modals remain unchanged -->
         <div id="modal-doctor" class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 w-full max-w-md hidden">
             <h2 id="modal-doctor-title" class="text-lg font-bold mb-6 text-gray-900 dark:text-white">Tambah Dokter Baru
             </h2>
@@ -432,7 +415,8 @@
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nama Dokter</label>
                     <input type="text" id="doctor-name"
                         class="form-input text-sm mt-1 block w-full border rounded-md shadow-sm p-3" required
-                        autocomplete="off"> </div>
+                        autocomplete="off">
+                </div>
                 <div class="mt-8 flex justify-end space-x-3"> <button type="button"
                         class="btn-cancel bg-gray-200 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-300 dark:bg-slate-600 dark:text-gray-200 dark:hover:bg-slate-500 font-semibold transition-colors text-sm">Batal</button>
                     <button type="submit"
@@ -497,7 +481,8 @@
                         class="btn-cancel bg-gray-200 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-300 dark:bg-slate-600 dark:text-gray-200 dark:hover:bg-slate-500 font-semibold transition-colors">Batal</button>
                     <button type="submit"
                         class="bg-success text-white px-5 py-2 rounded-lg hover:bg-green-600 font-semibold transition-colors">Buat
-                        Laporan</button> </div>
+                        Laporan</button>
+                </div>
             </form>
         </div>
         <div id="modal-alert"
@@ -520,29 +505,23 @@
             <div id="detail-modal-content"
                 class="space-y-4 text-sm border-t border-gray-200 dark:border-slate-700 pt-4"></div>
         </div>
-        <!-- Edit Profile Modal -->
         <div id="modal-edit-profile"
             class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 w-full max-w-md hidden">
             <h2 class="text-lg font-bold mb-6 text-gray-900 dark:text-white">Edit Profil</h2>
             <form id="form-edit-profile">
                 <div class="space-y-4 text-sm">
-                    <div class="flex flex-col items-center">
-                        <img id="profile-edit-preview" src="" alt="Pratinjau Foto Profil"
-                            class="w-24 h-24 rounded-full mb-3 object-cover">
-                        <input type="file" id="profile-photo-input" class="hidden" accept="image/*">
-                        <label for="profile-photo-input"
+                    <div class="flex flex-col items-center"> <img id="profile-edit-preview" src=""
+                            alt="Pratinjau Foto Profil" class="w-24 h-24 rounded-full mb-3 object-cover"> <input
+                            type="file" id="profile-photo-input" class="hidden" accept="image/*"> <label
+                            for="profile-photo-input"
                             class="cursor-pointer text-sm font-semibold text-primary-600 dark:text-primary-400 hover:underline">Ubah
-                            Foto</label>
-                    </div>
-                    <div>
-                        <label for="profile-name-input"
-                            class="block font-medium text-gray-700 dark:text-gray-300 mb-1">Nama Tampilan</label>
-                        <input type="text" id="profile-name-input"
-                            class="form-input mt-1 block w-full border rounded-md shadow-sm p-3" required>
-                    </div>
+                            Foto</label> </div>
+                    <div> <label for="profile-name-input"
+                            class="block font-medium text-gray-700 dark:text-gray-300 mb-1">Nama Tampilan</label> <input
+                            type="text" id="profile-name-input"
+                            class="form-input mt-1 block w-full border rounded-md shadow-sm p-3" required> </div>
                 </div>
-                <div class="mt-8 flex justify-end space-x-3">
-                    <button type="button"
+                <div class="mt-8 flex justify-end space-x-3"> <button type="button"
                         class="btn-cancel bg-gray-200 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-300 dark:bg-slate-600 dark:text-gray-200 dark:hover:bg-slate-500 font-semibold transition-colors text-sm">Batal</button>
                     <button type="submit"
                         class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 w-28 font-semibold transition-colors disabled:bg-primary-300 dark:disabled:bg-primary-800 text-sm">Simpan</button>
@@ -562,7 +541,7 @@
             apiKey: "AIzaSyChyGY3uPeZUj0jNpN4prLYIAKQeiOb8T8",
             authDomain: "wingman-73.firebaseapp.com",
             projectId: "wingman-73",
-            storageBucket: "wingman-73.appspot.com",
+            storageBucket: "wingman-73.firebasestorage.app",
             messagingSenderId: "254550350343",
             appId: "1:254550350343:web:a2dec17489e22c2f7aa8a2",
             measurementId: "G-E7745EMJED"
@@ -584,6 +563,7 @@
 
             const TRANSACTIONS_PER_PAGE = 10;
             const loginPage = document.getElementById('login-page'), appContainer = document.getElementById('app-container'),
+                globalLoader = document.getElementById('global-loader'),
                 btnGoogleLogin = document.getElementById('btn-google-login'), loginLoader = document.getElementById('login-loader'),
                 btnLogout = document.getElementById('btn-logout'), profileAvatar = document.getElementById('profile-avatar'),
                 profileName = document.getElementById('profile-name'), profileEmail = document.getElementById('profile-email'),
@@ -615,8 +595,8 @@
                 profileNameInput = document.getElementById('profile-name-input');
             let newPhotoFile = null;
 
-            onAuthStateChanged(auth, (user) => { loginLoader.classList.add('hidden'); btnGoogleLogin.classList.remove('hidden'); if (user) { state.currentUser = user; loginPage.classList.add('hidden'); appContainer.classList.remove('hidden'); appContainer.classList.add('flex'); setupUIForUser(user); setupRealtimeListeners(); } else { state.currentUser = null; loginPage.classList.remove('hidden'); appContainer.classList.add('hidden'); appContainer.classList.remove('flex'); resetState(); if (unsubscribeDoctors) unsubscribeDoctors(); if (unsubscribeTransactions) unsubscribeTransactions(); } });
-            btnGoogleLogin.addEventListener('click', async () => { loginLoader.classList.remove('hidden'); btnGoogleLogin.classList.add('hidden'); const provider = new GoogleAuthProvider(); try { await signInWithPopup(auth, provider); } catch (error) { showAlert(`Login Gagal: ${error.message}`, 'error'); } });
+            onAuthStateChanged(auth, (user) => { globalLoader.classList.add('hidden'); if (user) { state.currentUser = user; loginPage.classList.add('hidden'); appContainer.classList.remove('hidden'); appContainer.classList.add('flex'); setupUIForUser(user); setupRealtimeListeners(); } else { state.currentUser = null; loginPage.classList.remove('hidden'); appContainer.classList.add('hidden'); appContainer.classList.remove('flex'); resetState(); if (unsubscribeDoctors) unsubscribeDoctors(); if (unsubscribeTransactions) unsubscribeTransactions(); } });
+            btnGoogleLogin.addEventListener('click', async () => { loginLoader.classList.remove('hidden'); btnGoogleLogin.classList.add('hidden'); const provider = new GoogleAuthProvider(); try { await signInWithPopup(auth, provider); } catch (error) { showAlert(`Login Gagal: ${error.message}`, 'error'); loginLoader.classList.add('hidden'); btnGoogleLogin.classList.remove('hidden'); } });
             btnLogout.addEventListener('click', () => { showConfirm("Apakah Anda yakin ingin keluar?", async () => { try { await signOut(auth); } catch (error) { showAlert(`Logout Gagal: ${error.message}`, 'error'); } }); });
             function setupUIForUser(user) { profileName.textContent = user.displayName; profileEmail.textContent = user.email; profileAvatar.src = user.photoURL || `https://placehold.co/100x100/E2E8F0/4A5568?text=${user.displayName[0]}`; userGreeting.textContent = `Halo, ${user.displayName.split(' ')[0]}!`; }
             function resetState() { state = { doctors: [], transactions: [], activePage: 'home', selectedDoctorId: null, transactionSortOrder: 'desc', transactionGrouping: 'day', currentPage: 1, currentUser: null, }; switchPage('home'); }
@@ -683,7 +663,21 @@
             closeSuggestionBox.addEventListener('click', () => { contactSuggestionBox.classList.add('hidden'); sessionStorage.setItem('suggestionClosed', 'true'); });
             btnEditProfile.addEventListener('click', openEditProfileModal);
             formEditProfile.addEventListener('submit', handleProfileUpdate);
-            profilePhotoInput.addEventListener('change', (e) => { const file = e.target.files[0]; if (file) { newPhotoFile = file; const reader = new FileReader(); reader.onload = (e) => { profileEditPreview.src = e.target.result; }; reader.readAsDataURL(file); } });
+            profilePhotoInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    if (file.size > 1048576) { // 1MB in bytes
+                        showAlert('Ukuran foto tidak boleh melebihi 1 MB.', 'error');
+                        profilePhotoInput.value = '';
+                        newPhotoFile = null;
+                        return;
+                    }
+                    newPhotoFile = file;
+                    const reader = new FileReader();
+                    reader.onload = (e) => { profileEditPreview.src = e.target.result; };
+                    reader.readAsDataURL(file);
+                }
+            });
 
             const init = () => { updateTheme(); btnSortByDate.querySelector('i').className = 'fas mr-1 fa-sort-amount-down-alt'; };
             init();
